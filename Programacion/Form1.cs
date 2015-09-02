@@ -64,7 +64,7 @@ namespace Programacion
         {
             try
             {
-                string date = DateTime.Now.ToString("yyyy-MM-dd hh;mm;ss"); //2015-08-27%205;50;50?no=10
+                string date = DateTime.Now.ToString("yyyy-MM-dd HH;mm;ss"); //2015-08-27%205;50;50?no=10
                 HttpWebRequest request =
                             (HttpWebRequest)WebRequest.Create(System.Configuration.ConfigurationSettings.AppSettings["ScheduleService"].Trim() + date + "?no=10");
                 WebResponse response = request.GetResponse();
@@ -185,21 +185,32 @@ namespace Programacion
 
             int FirstIndex = ProgName.IndexOf("-");
             int SecondIndex = 0;
+            string SubTtl = "";
             if (FirstIndex > 0)
-            {
-                if (ProgName.StartsWith("Doc"))
+            {                
+                if (ProgName.ToUpper().StartsWith("DOC") || ProgName.ToUpper().StartsWith("SERI") || ProgName.ToUpper().StartsWith("PELÍ"))
                 {
                     SecondIndex = ProgName.IndexOf("-", FirstIndex + 1);
                     if (SecondIndex > FirstIndex)
                     {
+                        SubTtl= ProgName.Substring(FirstIndex, SecondIndex - FirstIndex + 1);
                         ProgName = ProgName.Remove(FirstIndex, SecondIndex - FirstIndex + 1);
                         ProgName = ProgName.Insert(FirstIndex, ":");
                     }
                     ProgName = ProgName.Replace("  :", ":");
                     ProgName = ProgName.Replace(" :", ":");
+                    if (!ProgName.ToUpper().StartsWith("PELÍ"))
+                    {
+                       ProgName += SubTtl.Replace("-","");
+                    }
+                    else
+                    {
+                        ProgName = ProgName.Replace("Películas -", "Películas:");
+                    }
                 }
                 else
                 {
+                   
                     ProgName = ProgName.Remove(FirstIndex, ProgName.Length - FirstIndex);
                 }
             }
