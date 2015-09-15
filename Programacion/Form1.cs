@@ -87,7 +87,7 @@ namespace Programacion
                     Data.Append("\r\n times = [");
                     foreach (var item in RvLst)
                     {
-                        Data.Append("\"" + item.Hour + "\",");
+                        Data.Append("\"" + item.Hour + " GMT\",");
                     }
                     Data.Append(" ];");
                     string DataTxtFile = ConfigurationSettings.AppSettings["DataTxtPath"].ToString().Trim();
