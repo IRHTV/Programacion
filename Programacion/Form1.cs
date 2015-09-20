@@ -28,7 +28,7 @@ namespace Programacion
             string[] Timesvl = ConfigurationSettings.AppSettings["RenderIntervalMin"].ToString().Trim().Split('#');
             foreach (string item in Timesvl)
             {
-                if ((DateTime.Now.AddMinutes(_TimeOffsetMin) >= Convert.ToDateTime(item)) && (DateTime.Now.AddMinutes(_TimeOffsetMin) <= Convert.ToDateTime(item).AddMinutes(1)))
+                if ((DateTime.Now >= Convert.ToDateTime(item)) && (DateTime.Now <= Convert.ToDateTime(item).AddMinutes(1)))
                 {
                     timer1.Enabled = false;
                     button1_Click(new object(), new EventArgs());
@@ -64,7 +64,7 @@ namespace Programacion
         {
             try
             {
-                string date = DateTime.Now.ToString("yyyy-MM-dd HH;mm;ss"); //2015-08-27%205;50;50?no=10
+                string date = DateTime.Now.AddMinutes(_TimeOffsetMin).ToString("yyyy-MM-dd HH;mm;ss"); //2015-08-27%205;50;50?no=10
                 HttpWebRequest request =
                             (HttpWebRequest)WebRequest.Create(System.Configuration.ConfigurationSettings.AppSettings["ScheduleService"].Trim() + date + "?no=10");
                 WebResponse response = request.GetResponse();
