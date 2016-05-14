@@ -182,6 +182,7 @@ namespace Programacion
             //2014-01-25 Replace Documentry by Doc
             ProgName = ProgName.Replace("documentary", "Doc");
             ProgName = ProgName.Replace("Documentary", "Doc");
+            ProgName = ProgName.Replace("\"", "'");
 
             int FirstIndex = ProgName.IndexOf("-");
             int SecondIndex = 0;
