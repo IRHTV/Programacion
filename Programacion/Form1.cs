@@ -182,6 +182,8 @@ namespace Programacion
             //2014-01-25 Replace Documentry by Doc
             ProgName = ProgName.Replace("documentary", "Doc");
             ProgName = ProgName.Replace("Documentary", "Doc");
+           
+            //Películas 
             ProgName = ProgName.Replace("\"", "'");
 
             int FirstIndex = ProgName.IndexOf("-");
@@ -215,7 +217,8 @@ namespace Programacion
                     ProgName = ProgName.Remove(FirstIndex, ProgName.Length - FirstIndex);
                 }
             }
-
+            ProgName = ProgName.Replace("películas", "Cine iraní");
+            ProgName = ProgName.Replace("Películas", "Cine iraní");
             int TitleLenght = int.Parse(ConfigurationSettings.AppSettings["TitleLenght"].ToString().Trim());
             if (ProgName.Length > TitleLenght)
             {
